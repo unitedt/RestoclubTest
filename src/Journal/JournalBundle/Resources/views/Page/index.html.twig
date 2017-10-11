@@ -1,0 +1,45 @@
+{% extends 'JournalJournalBundle::layout.html.twig' %}
+
+{% block body %}
+    {% for article in articles %}
+        <article class="journal">
+            <div class="date"><time datetime="{{ article.published.format('c') }}">{{ article.published.format('l, F j, Y') }}</time></div>
+            <header>
+                <h2><a href="{{ path('JournalJournalBundle_article_show', { 'slug': article.slug }) }}">{{ article.title }}</a></h2>
+            </header>
+            
+            <div class="snippet">
+                <p>{{ article.content(250) }}</p>
+                <p class="continue"><a href="{{ path('JournalJournalBundle_article_show', { 'slug': article.slug }) }}">More...</a></p>
+            </div>
+
+            <footer class="meta">
+                {% if article.author is defined %}
+                	<p>Posted by <span class="highlight">{{ article.author }}</span> at {{ article.published.format('h:iA') }}</p>
+                {% endif %}
+                {% if article.url is defined %}
+                	<p>Website: <a href="{{ article.url }}">{{ article.url }}</a></p>
+                {% endif %}
+                {% if article.tags is defined and article.tags is not empty %}
+                	<p>Tags: <span class="highlight">
+                	{% for tag in article.tags %}
+                	    <a href="{{ path('JournalJournalBundle_tag_articles', { 'name': tag.name }) }}">{{ tag.name }}</a>{% if not loop.last %}, {% endif %}
+                	{% endfor %}
+                	</span></p>
+                {% endif %}
+            </footer>
+        </article>
+    {% else %}
+        <p>There are no articles</p>
+    {% endfor %}
+{% endblock %}
+
+{% block sidebar %}
+	{% if tags is defined and tags is not empty %}
+    	{% for tag in tags %}
+    		<p><a href="{{ path('JournalJournalBundle_tag_articles', { 'name': tag.name }) }}">{{ tag.name }}</a></p>
+        {% endfor %}
+    {% else %}
+    	<p>No tags</p>
+    {% endif %}
+{% endblock %}

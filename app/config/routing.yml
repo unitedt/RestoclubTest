@@ -1,3 +1,4 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+journal_journal:
+    resource: "@JournalJournalBundle/Resources/config/routing.yml"
+    prefix:   /
+

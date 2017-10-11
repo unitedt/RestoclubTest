@@ -1,0 +1,43 @@
+JournalJournalBundle_homepage:
+    path:     /
+    defaults: { _controller: "JournalJournalBundle:Page:index" }
+    requirements:
+         methods:  GET
+JournalJournalBundle_author_articles:
+    path:     /author_articles
+    defaults: { _controller: "JournalJournalBundle:Page:author" }
+    requirements:
+         methods:  GET
+JournalJournalBundle_tag_articles:
+    path:  /tags/{name}
+    defaults: { _controller: "JournalJournalBundle:Page:tag" }
+    requirements:
+        methods:  GET
+JournalJournalBundle_article_show:
+    path:  /articles/{slug}
+    defaults: { _controller: "JournalJournalBundle:Article:show" }
+    requirements:
+        methods:  GET
+JournalJournalBundle_author_article_create:
+    path:  /author_article
+    defaults: { _controller: "JournalJournalBundle:Article:edit", discriminator: "author", id: null }
+    requirements:
+        methods:  GET, POST
+JournalJournalBundle_common_article_create:
+    path:  /common_article
+    defaults: { _controller: "JournalJournalBundle:Article:edit", discriminator: "common", id: null }
+    requirements:
+        methods:  GET, POST
+JournalJournalBundle_author_article_update:
+    path:  /author_article/{id}
+    defaults: { _controller: "JournalJournalBundle:Article:edit", discriminator: "author" }
+    requirements:
+        methods:  GET, POST
+        id: \d+
+JournalJournalBundle_common_article_update:
+    path:  /common_article/{id}
+    defaults: { _controller: "JournalJournalBundle:Article:edit", discriminator: "common" }
+    requirements:
+        methods:  GET, POST
+        id: \d+
+        

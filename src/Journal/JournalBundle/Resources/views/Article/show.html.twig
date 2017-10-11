@@ -1,0 +1,31 @@
+{% extends 'JournalJournalBundle::layout.html.twig' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block body %}
+    <article class="journal">
+        <header>
+            <div class="date"><time datetime="{{ article.published.format('c') }}">{{ article.published.format('l, F j, Y') }}</time></div>
+            <h2>{{ article.title }}</h2>
+            {% if article.author is defined %}
+            	<h3>Author: {{ article.author }}</h3>
+            {% endif %}
+            {% if article.url is defined %}
+            	<h3>Website: <a href="{{ article.url }}">{{ article.url }}</a></h3>
+            {% endif %}
+            {% if article.tags is defined %}
+            	<h3>
+            	{% for tag in article.tags %}
+            		<a href="{{ path('JournalJournalBundle_tag_articles', { 'name': tag.name }) }}">{{ tag.name }}</a>{% if not loop.last %}, {% endif %}
+            	{% endfor %}
+            	</h3>
+            {% endif %}
+        </header>
+        <div>
+            <p>{{ article.content }}</p>
+        </div>
+        <footer class="meta">
+			<a href="{{ path('JournalJournalBundle_' ~ discriminator ~ '_article_update', { 'id': article.id }) }}">Edit article...</a>
+        </footer>
+    </article>
+{% endblock %}

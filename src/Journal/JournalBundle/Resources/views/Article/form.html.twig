@@ -1,0 +1,15 @@
+{% extends 'JournalJournalBundle::layout.html.twig' %}
+
+{% block title %}Article{% endblock%}
+
+{% block body %}
+    {{ form_start(form, { 'action': path('JournalJournalBundle_' ~ discriminator ~ '_article_' ~ act, act == 'create' ? {} : { 'id': article.id }), 'method': 'POST', 'attr': {'class': 'journal'} }) }}
+
+    {{ form_widget(form) }}
+    <p>
+        <input type="submit" name="Submit" value="Submit">
+    </p>
+{% endblock %}
+
+
+
