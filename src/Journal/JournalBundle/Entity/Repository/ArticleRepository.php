@@ -49,13 +49,8 @@ class ArticleRepository extends EntityRepository
     }
     
     
-    public function persistArticle(\Journal\JournalBundle\Entity\Article $oArticle, $aTags = []) 
+    public function persistArticle(\Journal\JournalBundle\Entity\Article $oArticle) 
     {
-		if ($oArticle instanceof CommonArticle) {
-			$oArticle->clearTags();
-			$this->_em->getRepository('JournalJournalBundle:CommonArticle')->addTagsToArticles($oArticle, $aTags);
-		}
-            
 		$this->_em->persist($oArticle);
 		$this->_em->flush();
     }

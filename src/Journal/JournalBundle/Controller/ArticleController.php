@@ -46,7 +46,7 @@ class ArticleController extends Controller
         $oForm->handleRequest($oRequest);
 
         if ($oForm->isSubmitted() && $oForm->isValid()) {
-        	$oARep->persistArticle($oArticle, $oForm->has('tags') ? $oForm->get('tags')->getData() : []);
+        	$oARep->persistArticle($oArticle);
         	
             return $this->redirect($this->generateUrl('JournalJournalBundle_article_show', ['slug' => $oArticle->getSlug()]));
         }
